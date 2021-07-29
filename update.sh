@@ -1,7 +1,9 @@
 # Update backend
-git stash
-git pull
-npm install
+git stash # Stash local repo
+git pull # Update local repo
+npm install # Update local node modules if necessary
+npm run build # Create optimized build for production
+chmod +x update.sh # Update file permissions 
 
 # Update frontend
 if [ ! -d "./madhouse-token-frontend" ]
@@ -10,9 +12,7 @@ then # Clone frontend
 fi
 
 cd ./madhouse-token-frontend
-git stash # Stash local repo
-git pull # Update local repo
-npm install # Update local node modules if necessary
+git stash
+git pull
+npm install
 npm run build # Create optimized build for production
-
-node index.js
