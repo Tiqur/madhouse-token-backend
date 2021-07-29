@@ -20,6 +20,6 @@
     "express": "^4.17.1"
   },
   "scripts": {
-    "start": "PORT=80 node index.js"
+    "start": "PORT=443 node index.js"
   }
 }
