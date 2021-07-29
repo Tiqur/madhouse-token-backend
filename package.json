@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Tiqur/madhouse-token-backend#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "PORT=80 node index.js"
   }
 }
