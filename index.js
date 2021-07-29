@@ -1,9 +1,13 @@
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.static("./madhouse-token-frontend/build"));
+const options = {
+  key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
+};
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-});
+app.use(express.static("build"));
+https.createServer(options, app).listen(port);
