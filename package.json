@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Tiqur/madhouse-token-backend/issues"
   },
-  "homepage": "https://github.com/Tiqur/madhouse-token-backend#readme"
+  "homepage": "https://github.com/Tiqur/madhouse-token-backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
