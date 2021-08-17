@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "PORT=443 node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,7 @@
   },
   "homepage": "https://github.com/Tiqur/madhouse-token-backend#readme",
   "dependencies": {
-    "express": "^4.17.1"
-  },
-  "scripts": {
-    "start": "PORT=443 node index.js"
+    "express": "^4.17.1",
+    "helmet": "^4.6.0"
   }
 }

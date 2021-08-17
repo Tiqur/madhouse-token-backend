@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require('helmet');
 const https = require('https');
 const fs = require('fs');
 const app = express();
@@ -9,5 +10,6 @@ const options = {
   cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
 
+app.use(helmet());
 app.use(express.static("madhouse-token-frontend/build"));
 https.createServer(options, app).listen(port);
