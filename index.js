@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compresison');
 const helmet = require('helmet');
 const https = require('https');
 const fs = require('fs');
@@ -11,5 +12,6 @@ const options = {
 };
 
 app.use(helmet());
+app.use(compression());
 app.use(express.static("madhouse-token-frontend/build"));
 https.createServer(options, app).listen(port);
