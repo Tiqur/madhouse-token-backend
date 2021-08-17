@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=443 pm2 start index.js"
+    "start": "PORT=443 NODE_ENV=production pm2 start index.js"
   },
   "repository": {
     "type": "git",
