@@ -13,5 +13,5 @@ const options = {
 
 app.use(helmet({contentSecurityPolicy: false}));
 app.use(compression());
-app.use(express.static("madhouse-token-frontend/build"));
+app.use(express.static("build"));
 https.createServer(options, app).listen(port);

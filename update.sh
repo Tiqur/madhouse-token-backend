@@ -16,3 +16,5 @@ git stash
 git pull
 npm install
 npm run build # Create optimized build for production
+
+mv ../madhouse-token-frontend/build/ ../build

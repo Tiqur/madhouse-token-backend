@@ -105,3 +105,4 @@ dist
 
 # Frontend
 madhouse-token-frontend/
+build/
