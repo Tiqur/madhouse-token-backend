@@ -11,7 +11,7 @@ const options = {
   cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
 
-app.use(helmet());
+app.use(helmet({contentSecurityPolicy: false}));
 app.use(compression());
 app.use(express.static("madhouse-token-frontend/build"));
 https.createServer(options, app).listen(port);
