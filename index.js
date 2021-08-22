@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const compression = require('compression');
 const helmet = require('helmet');
 const https = require('https');
@@ -11,7 +12,12 @@ const options = {
   cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
 
-app.use(helmet({contentSecurityPolicy: false}));
+app.use(helmet());
 app.use(compression());
-app.use(express.static("build"));
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
 https.createServer(options, app).listen(port);
