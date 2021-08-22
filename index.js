@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const compression = require('compression');
 const helmet = require('helmet');
 const https = require('https');
 const fs = require('fs');
@@ -13,7 +12,6 @@ const options = {
 };
 
 app.use(helmet());
-app.use(compression());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('*', (req, res, next) => {
