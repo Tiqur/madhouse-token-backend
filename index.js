@@ -20,7 +20,9 @@ const options = {
 setInterval(async () => {
   try {
     const price_resp = axios.get(`https://api.pancakeswap.info/api/v2/tokens/${contract_address}`);
+    const supply_resp = axios.get(`https://api.bscscan.com/api?module=stats&action=tokenCsupply&contractaddress=${contract_address}&apikey=${api_key}`);
     console.log(price_resp);
+    console.log(supply_resp);
   } catch (e) {
     console.error(e);
   }
