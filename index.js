@@ -17,39 +17,20 @@ const token_data = {
 }
 
 // SSL Certificate
-const options = {
-  key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
-  cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
-};
 
 // Fetch token data
 setInterval(async () => {
   try {
     const price_resp = axios.get(`https://api.pancakeswap.info/api/v2/tokens/${contract_address}`);
     const supply_resp = axios.get(`https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=${contract_address}&apikey=${api_key}`);
+    const current_supply_resp = axios.get(`https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${contract_address}&address=0x000000000000000000000000000000000000dead&tag=latest&apikey=${api_key}`);
 
     // Set values
     token_data.price = +(await price_resp).data.data.price;
     token_data.supply = (await supply_resp).data.result / 1000000000;
-    token_data.market_cap = token_data.price * token_data.supply;
+    token_data.market_cap = (token_data.supply - (await current_supply_resp).data.result / 1000000000) * token_data.price;
     console.table(token_data)
   } catch (e) {
     console.error(e);
   }
 }, 5000);
-
-// Routing and middleware
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/api', (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.send(token_data);
-});
-
-app.get('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-
-// Start setver
-https.createServer(options, app).listen(port);
