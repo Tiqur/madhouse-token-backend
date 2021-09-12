@@ -17,6 +17,10 @@ const token_data = {
 }
 
 // SSL Certificate
+const options = {
+  key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
+};
 
 // Fetch token data
 setInterval(async () => {
@@ -34,3 +38,19 @@ setInterval(async () => {
     console.error(e);
   }
 }, 5000);
+
+// Routing and middleware
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/api', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.send(token_data);
+});
+
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+
+// Start setver
+https.createServer(options, app).listen(port);
