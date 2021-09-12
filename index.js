@@ -42,6 +42,7 @@ setInterval(async () => {
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/api', (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.send(token_data);
 });
 
