@@ -853,7 +853,7 @@ setInterval(async () => {
 
           token_data.price = price.toFixed(8).toString();
           token_data.supply = Math.round(supply).toLocaleString();
-          token_data.market_cap = market_cap.toLocaleString();
+          token_data.market_cap = Math.round(market_cap).toLocaleString();
         });
       });
     });
