@@ -836,8 +836,8 @@ const token_data = {
 
 // SSL Certificate
 const options = {
-  key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
-  cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
+  //key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
+  //cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
 
 // Fetch token data
@@ -849,11 +849,12 @@ setInterval(async () => {
         Promise.all([busdPair.getReserves(),madhousePair.getReserves(),madhouseToken.deadBalance()]).then((result)=>{
           wbnbPerBusd = result[0]._reserve1/result[0]._reserve0
           const price = result[1]._reserve1/result[1]._reserve0*wbnbPerBusd/(10**(18-madhouseToken.decimals));
+          const circulating_supply = (madhouseToken.totalSupply-result[2])/(10 ** madhouseToken.decimals);
           const market_cap = supply * price;
 
           token_data.price = price.toFixed(8).toString();
           token_data.supply = Math.round(supply).toLocaleString();
-          token_data.market_cap = Math.round(market_cap).toLocaleString();
+          token_data.market_cap = Math.round(circulating_supply * price).toLocaleString();
         });
       });
     });
