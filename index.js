@@ -836,8 +836,8 @@ const token_data = {
 
 // SSL Certificate
 const options = {
-  //key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
-  //cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
+  key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
 
 // Fetch token data
