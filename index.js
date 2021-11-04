@@ -851,8 +851,8 @@ setInterval(async () => {
           const price = result[1]._reserve1/result[1]._reserve0*wbnbPerBusd/(10**(18-madhouseToken.decimals));
           const market_cap = supply * price;
 
-          token_data.price = price.toString();
-          token_data.supply = supply.toLocaleString();
+          token_data.price = price.toFixed(8).toString();
+          token_data.supply = Math.round(supply).toLocaleString();
           token_data.market_cap = market_cap.toLocaleString();
         });
       });
