@@ -832,6 +832,7 @@ const token_data = {
   price: 0,
   circulating_supply: 0,
   total_supply: 0,
+  burned: 0,
   market_cap: 0
 }
 
@@ -858,6 +859,7 @@ setInterval(async () => {
           token_data.circulating_supply = Math.round(supply).toLocaleString();
           token_data.total_supply = Math.round(supply - deadBalance).toLocaleString();
           token_data.market_cap = Math.round(circulating_supply * price).toLocaleString();
+          token_data.burned = (BigInt(1000000000) - BigInt(Math.round(supply - deadBalance))).toLocaleString()
         });
       });
     });
