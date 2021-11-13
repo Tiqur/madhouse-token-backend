@@ -835,7 +835,7 @@ const token_data = {
 }
 
 // SSL Certificate
-const options = {
+const options = process.env.DEV ? {} : {
   key: fs.readFileSync(__dirname + '/private.key', 'utf8'),
   cert: fs.readFileSync(__dirname + '/public.cert', 'utf8')
 };
