@@ -830,7 +830,8 @@ const busdPair = new Token(pancakesawpPairJsonInterface,'0x58F876857a02D6762E010
 // Initialize token data
 const token_data = {
   price: 0,
-  supply: 0,
+  circulating_supply: 0,
+  total_supply: 0,
   market_cap: 0
 }
 
@@ -843,7 +844,8 @@ const options = process.env.DEV ? {} : {
 // Fetch token data
 setInterval(async () => {
   try {
-    Promise.all(madhouseToken.init()).then(()=>{
+    Promise.all(madhouseToken.init()).then( async ()=>{
+      const deadBalance = (await madhouseToken.deadBalance())/(10 ** madhouseToken.decimals);
       const supply = madhouseToken.totalSupply/(10 ** madhouseToken.decimals);
       Promise.all([busdPair.init(),madhousePair.init()]).then(()=>{
         Promise.all([busdPair.getReserves(),madhousePair.getReserves(),madhouseToken.deadBalance()]).then((result)=>{
@@ -853,7 +855,8 @@ setInterval(async () => {
           const market_cap = supply * price;
 
           token_data.price = price.toFixed(8).toString();
-          token_data.supply = Math.round(supply).toLocaleString();
+          token_data.circulating_supply = Math.round(supply).toLocaleString();
+          token_data.total_supply = Math.round(supply - deadBalance).toLocaleString();
           token_data.market_cap = Math.round(circulating_supply * price).toLocaleString();
         });
       });
